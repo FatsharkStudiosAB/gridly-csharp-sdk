@@ -40,7 +40,7 @@ namespace Com.Gridly.Model
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="status">status.</param>
-        public View(Dictionary<string, Object> customProperties = default(Dictionary<string, Object>), string description = default(string), string gridId = default(string), List<string> groupTagDefinition = default(List<string>), string id = default(string), string name = default(string), string status = default(string))
+        public View(List<ViewColumn> columns = default(List<ViewColumn>), Dictionary<string, Object> customProperties = default(Dictionary<string, Object>), string description = default(string), string gridId = default(string), List<string> groupTagDefinition = default(List<string>), string id = default(string), string name = default(string), string status = default(string))
         {
             this.CustomProperties = customProperties;
             this.Description = description;
@@ -49,7 +49,14 @@ namespace Com.Gridly.Model
             this.Id = id;
             this.Name = name;
             this.Status = status;
+            this.Columns = columns;
         }
+
+        /// <summary>
+        /// Gets or Sets Columns
+        /// </summary>
+        [DataMember(Name = "columns", EmitDefaultValue = false)]
+        public List<ViewColumn> Columns { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomProperties

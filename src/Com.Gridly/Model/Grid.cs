@@ -42,7 +42,7 @@ namespace Com.Gridly.Model
         /// <param name="name">name.</param>
         /// <param name="parentGridId">parentGridId.</param>
         /// <param name="status">status.</param>
-        public Grid(string branchId = default(string), List<Grid> branches = default(List<Grid>), Dictionary<string, Object> customProperties = default(Dictionary<string, Object>), string defaultAccessViewId = default(string), List<string> groupTagDefinition = default(List<string>), string id = default(string), string name = default(string), string parentGridId = default(string), string status = default(string))
+        public Grid(List<ViewColumn> columns = default(List<ViewColumn>), string branchId = default(string), List<Grid> branches = default(List<Grid>), Dictionary<string, Object> customProperties = default(Dictionary<string, Object>), string defaultAccessViewId = default(string), List<string> groupTagDefinition = default(List<string>), string id = default(string), string name = default(string), string parentGridId = default(string), string status = default(string))
         {
             this.BranchId = branchId;
             this.Branches = branches;
@@ -53,7 +53,14 @@ namespace Com.Gridly.Model
             this.Name = name;
             this.ParentGridId = parentGridId;
             this.Status = status;
+            this.Columns = columns;
         }
+
+        /// <summary>
+        /// Gets or Sets Columns
+        /// </summary>
+        [DataMember(Name = "columns", EmitDefaultValue = false)]
+        public List<ViewColumn> Columns { get; set; }
 
         /// <summary>
         /// Gets or Sets BranchId
