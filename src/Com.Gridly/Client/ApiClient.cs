@@ -303,7 +303,7 @@ namespace Com.Gridly.Client
                         {
                             string fileName = filePath + SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
                             File.WriteAllBytes(fileName, response.RawBytes);
-                            return new FileStream(fileName, FileMode.Create);
+                            return new FileStream(fileName, FileMode.Open);
                         }
                     }
                 }
