@@ -4,12 +4,96 @@ All URIs are relative to *https://api.gridly.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**Create**](ViewApi.md#create) | **POST** /v1/views | create
 [**Export**](ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export
 [**Get**](ViewApi.md#get) | **GET** /v1/views/{viewId} | get
 [**ImportView**](ViewApi.md#importview) | **POST** /v1/views/{viewId}/import | importView
 [**List**](ViewApi.md#list) | **GET** /v1/views | list
 [**Merge**](ViewApi.md#merge) | **POST** /v1/views/{viewId}/merge | merge
 
+
+
+## Create
+
+> View Create (CreateView createView)
+
+create
+
+### Example
+
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using Com.Gridly.Api;
+using Com.Gridly.Client;
+using Com.Gridly.Model;
+
+namespace Example
+{
+    public class CreateExample
+    {
+        public static void Main()
+        {
+            Configuration.Default.BasePath = "https://api.gridly.com";
+            // Configure API key authorization: ApiKey
+            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+
+            var apiInstance = new ViewApi(Configuration.Default);
+            var createView = new CreateView(); // CreateView | createView
+
+            try
+            {
+                // create
+                View result = apiInstance.Create(createView);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Debug.Print("Exception when calling ViewApi.Create: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createView** | [**CreateView**](CreateView.md)| createView | 
+
+### Return type
+
+[**View**](View.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **201** | Created |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## Export
@@ -198,7 +282,7 @@ Name | Type | Description  | Notes
 
 ## ImportView
 
-> void ImportView (string viewId, System.IO.Stream file, Object importRequest = null, Object type = null)
+> void ImportView (string viewId, System.IO.Stream file, string importRequest = null, string type = null)
 
 importView
 
@@ -226,8 +310,8 @@ namespace Example
             var apiInstance = new ViewApi(Configuration.Default);
             var viewId = viewId_example;  // string | viewId
             var file = BINARY_DATA_HERE;  // System.IO.Stream | The following file types are supported: csv, tsv, xls, xlsx and JSON
-            var importRequest = new Object(); // Object | importRequest (optional) 
-            var type = new Object(); // Object | type (optional) 
+            var importRequest = importRequest_example;  // string | importRequest (optional) 
+            var type = type_example;  // string | type (optional) 
 
             try
             {
@@ -252,8 +336,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **string**| viewId | 
  **file** | **System.IO.Stream**| The following file types are supported: csv, tsv, xls, xlsx and JSON | 
- **importRequest** | [**Object**](Object.md)| importRequest | [optional] 
- **type** | [**Object**](Object.md)| type | [optional] 
+ **importRequest** | **string**| importRequest | [optional] 
+ **type** | **string**| type | [optional] 
 
 ### Return type
 

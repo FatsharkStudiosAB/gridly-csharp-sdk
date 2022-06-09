@@ -25,33 +25,41 @@ using OpenAPIDateConverter = Com.Gridly.Client.OpenAPIDateConverter;
 namespace Com.Gridly.Model
 {
     /// <summary>
-    /// DeleteRecord
+    /// CreateView
     /// </summary>
     [DataContract]
-    public partial class DeleteRecord :  IEquatable<DeleteRecord>, IValidatableObject
+    public partial class CreateView :  IEquatable<CreateView>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeleteRecord" /> class.
+        /// Initializes a new instance of the <see cref="CreateView" /> class.
         /// </summary>
-        /// <param name="identifiers">identifiers.</param>
-        /// <param name="ids">ids.</param>
-        public DeleteRecord(List<RecordIdentifierWrapper> identifiers = default(List<RecordIdentifierWrapper>), List<string> ids = default(List<string>))
+        /// <param name="columns">columns.</param>
+        /// <param name="gridId">gridId.</param>
+        /// <param name="name">name.</param>
+        public CreateView(List<AddViewColumn> columns = default(List<AddViewColumn>), string gridId = default(string), string name = default(string))
         {
-            this.Identifiers = identifiers;
-            this.Ids = ids;
+            this.Columns = columns;
+            this.GridId = gridId;
+            this.Name = name;
         }
 
         /// <summary>
-        /// Gets or Sets Identifiers
+        /// Gets or Sets Columns
         /// </summary>
-        [DataMember(Name="identifiers", EmitDefaultValue=false)]
-        public List<RecordIdentifierWrapper> Identifiers { get; set; }
+        [DataMember(Name="columns", EmitDefaultValue=false)]
+        public List<AddViewColumn> Columns { get; set; }
 
         /// <summary>
-        /// Gets or Sets Ids
+        /// Gets or Sets GridId
         /// </summary>
-        [DataMember(Name="ids", EmitDefaultValue=false)]
-        public List<string> Ids { get; set; }
+        [DataMember(Name="gridId", EmitDefaultValue=false)]
+        public string GridId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,9 +68,10 @@ namespace Com.Gridly.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DeleteRecord {\n");
-            sb.Append("  Identifiers: ").Append(Identifiers).Append("\n");
-            sb.Append("  Ids: ").Append(Ids).Append("\n");
+            sb.Append("class CreateView {\n");
+            sb.Append("  Columns: ").Append(Columns).Append("\n");
+            sb.Append("  GridId: ").Append(GridId).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,31 +92,35 @@ namespace Com.Gridly.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DeleteRecord);
+            return this.Equals(input as CreateView);
         }
 
         /// <summary>
-        /// Returns true if DeleteRecord instances are equal
+        /// Returns true if CreateView instances are equal
         /// </summary>
-        /// <param name="input">Instance of DeleteRecord to be compared</param>
+        /// <param name="input">Instance of CreateView to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeleteRecord input)
+        public bool Equals(CreateView input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Identifiers == input.Identifiers ||
-                    this.Identifiers != null &&
-                    input.Identifiers != null &&
-                    this.Identifiers.SequenceEqual(input.Identifiers)
+                    this.Columns == input.Columns ||
+                    this.Columns != null &&
+                    input.Columns != null &&
+                    this.Columns.SequenceEqual(input.Columns)
                 ) && 
                 (
-                    this.Ids == input.Ids ||
-                    this.Ids != null &&
-                    input.Ids != null &&
-                    this.Ids.SequenceEqual(input.Ids)
+                    this.GridId == input.GridId ||
+                    (this.GridId != null &&
+                    this.GridId.Equals(input.GridId))
+                ) && 
+                (
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
                 );
         }
 
@@ -120,10 +133,12 @@ namespace Com.Gridly.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Identifiers != null)
-                    hashCode = hashCode * 59 + this.Identifiers.GetHashCode();
-                if (this.Ids != null)
-                    hashCode = hashCode * 59 + this.Ids.GetHashCode();
+                if (this.Columns != null)
+                    hashCode = hashCode * 59 + this.Columns.GetHashCode();
+                if (this.GridId != null)
+                    hashCode = hashCode * 59 + this.GridId.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;
             }
         }

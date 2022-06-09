@@ -25,33 +25,33 @@ using OpenAPIDateConverter = Com.Gridly.Client.OpenAPIDateConverter;
 namespace Com.Gridly.Model
 {
     /// <summary>
-    /// DeleteRecord
+    /// AddViewColumn
     /// </summary>
     [DataContract]
-    public partial class DeleteRecord :  IEquatable<DeleteRecord>, IValidatableObject
+    public partial class AddViewColumn :  IEquatable<AddViewColumn>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeleteRecord" /> class.
+        /// Initializes a new instance of the <see cref="AddViewColumn" /> class.
         /// </summary>
-        /// <param name="identifiers">identifiers.</param>
-        /// <param name="ids">ids.</param>
-        public DeleteRecord(List<RecordIdentifierWrapper> identifiers = default(List<RecordIdentifierWrapper>), List<string> ids = default(List<string>))
+        /// <param name="editable">editable.</param>
+        /// <param name="id">id.</param>
+        public AddViewColumn(bool editable = default(bool), string id = default(string))
         {
-            this.Identifiers = identifiers;
-            this.Ids = ids;
+            this.Editable = editable;
+            this.Id = id;
         }
 
         /// <summary>
-        /// Gets or Sets Identifiers
+        /// Gets or Sets Editable
         /// </summary>
-        [DataMember(Name="identifiers", EmitDefaultValue=false)]
-        public List<RecordIdentifierWrapper> Identifiers { get; set; }
+        [DataMember(Name="editable", EmitDefaultValue=false)]
+        public bool Editable { get; set; }
 
         /// <summary>
-        /// Gets or Sets Ids
+        /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="ids", EmitDefaultValue=false)]
-        public List<string> Ids { get; set; }
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,9 +60,9 @@ namespace Com.Gridly.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DeleteRecord {\n");
-            sb.Append("  Identifiers: ").Append(Identifiers).Append("\n");
-            sb.Append("  Ids: ").Append(Ids).Append("\n");
+            sb.Append("class AddViewColumn {\n");
+            sb.Append("  Editable: ").Append(Editable).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,31 +83,29 @@ namespace Com.Gridly.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DeleteRecord);
+            return this.Equals(input as AddViewColumn);
         }
 
         /// <summary>
-        /// Returns true if DeleteRecord instances are equal
+        /// Returns true if AddViewColumn instances are equal
         /// </summary>
-        /// <param name="input">Instance of DeleteRecord to be compared</param>
+        /// <param name="input">Instance of AddViewColumn to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeleteRecord input)
+        public bool Equals(AddViewColumn input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Identifiers == input.Identifiers ||
-                    this.Identifiers != null &&
-                    input.Identifiers != null &&
-                    this.Identifiers.SequenceEqual(input.Identifiers)
+                    this.Editable == input.Editable ||
+                    (this.Editable != null &&
+                    this.Editable.Equals(input.Editable))
                 ) && 
                 (
-                    this.Ids == input.Ids ||
-                    this.Ids != null &&
-                    input.Ids != null &&
-                    this.Ids.SequenceEqual(input.Ids)
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
                 );
         }
 
@@ -120,10 +118,10 @@ namespace Com.Gridly.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Identifiers != null)
-                    hashCode = hashCode * 59 + this.Identifiers.GetHashCode();
-                if (this.Ids != null)
-                    hashCode = hashCode * 59 + this.Ids.GetHashCode();
+                if (this.Editable != null)
+                    hashCode = hashCode * 59 + this.Editable.GetHashCode();
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
                 return hashCode;
             }
         }
