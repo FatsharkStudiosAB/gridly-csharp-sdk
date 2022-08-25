@@ -1,18 +1,19 @@
 
-# Com.Gridly.Model.Grid
+# Com.Gridly.Model.TransMem
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] 
-**Columns** | [**List&lt;ViewColumn&gt;**](ViewColumn.md) |  | [optional] 
-**DefaultAccessViewId** | **string** |  | [optional] 
+**ProjectIds** | **List&lt;long&gt;** |  | [optional] 
+**IsDefault** | **bool** |  | [optional] 
+**IsDisabled** | **bool** |  | [optional] 
+**Name** | **string** |  | 
 **Description** | **string** |  | [optional] 
-**Metadata** | **Dictionary&lt;string, string&gt;** |  | [optional] 
-**Name** | **string** |  | [optional] 
-**RecordIdentifierType** | **string** |  | [optional] 
-**Status** | **string** |  | [optional] 
+**FuzzyRatio** | **int** |  | [optional] 
+**AlteredBy** | **long** |  | [optional] 
+**AlteredTime** | **DateTime** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -1,15 +1,15 @@
 
-# Com.Gridly.Model.SetCell
+# Com.Gridly.Model.CreateTransMem
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ColumnId** | **string** |  | [optional] 
-**DependencyStatus** | **string** |  | [optional] 
-**ReferencedIds** | **List&lt;string&gt;** |  | [optional] 
-**SourceStatus** | **string** |  | [optional] 
-**Value** | **Object** |  | [optional] 
+**Name** | **string** |  | 
+**Description** | **string** |  | [optional] 
+**ProjectIds** | **List&lt;long&gt;** |  | [optional] 
+**FuzzyRatio** | **int** |  | [optional] 
+**IsDisabled** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
