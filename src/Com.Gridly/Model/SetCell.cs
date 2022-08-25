@@ -104,6 +104,8 @@ namespace Com.Gridly.Model
         /// </summary>
         [DataMember(Name="sourceStatus", EmitDefaultValue=true)]
         public SourceStatusEnum? SourceStatus { get; set; }
+        
+        [Obsolete("Use SetCell.New(...) instead")]
         /// <summary>
         /// Initializes a new instance of the <see cref="SetCell" /> class.
         /// </summary>
@@ -119,6 +121,19 @@ namespace Com.Gridly.Model
             this.ReferencedIds = referencedIds;
             this.SourceStatus = sourceStatus;
             this.Value = value;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SetCell" /> class.
+        /// </summary>
+        /// <param name="columnId">columnId.</param>
+        /// <param name="dependencyStatus">dependencyStatus.</param>
+        /// <param name="referencedIds">referencedIds.</param>
+        /// <param name="value">value.</param>
+        /// <param name="sourceStatus">sourceStatus.</param>
+        public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?))
+        {
+	        return new SetCell(columnId, dependencyStatus, referencedIds, sourceStatus, value);
         }
 
         /// <summary>
