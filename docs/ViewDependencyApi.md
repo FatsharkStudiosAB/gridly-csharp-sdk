@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Create**](ViewDependencyApi.md#create) | **POST** /v1/views/{viewId}/dependencies | create
 [**Delete**](ViewDependencyApi.md#delete) | **DELETE** /v1/views/{viewId}/dependencies | delete
-[**Delete_0**](ViewDependencyApi.md#delete_0) | **DELETE** /v1/views/{viewId}/dependencies/{dependencyId} | delete
+[**DeleteById**](ViewDependencyApi.md#deletebyid) | **DELETE** /v1/views/{viewId}/dependencies/{dependencyId} | deleteById
 [**Get**](ViewDependencyApi.md#get) | **GET** /v1/views/{viewId}/dependencies/{dependencyId} | get
 [**List**](ViewDependencyApi.md#list) | **GET** /v1/views/{viewId}/dependencies | list
 [**Update**](ViewDependencyApi.md#update) | **PUT** /v1/views/{viewId}/dependencies/{dependencyId} | update
@@ -16,6 +16,8 @@ Method | HTTP request | Description
 ## Create
 
 > Dependency Create (string viewId, CreateDependency createDependency)
+
+create
 
 create
 
@@ -41,8 +43,8 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var viewId = viewId_example;  // string | viewId
-            var createDependency = new CreateDependency(); // CreateDependency | createDependency
+            var viewId = "viewId_example";  // string | viewId
+            var createDependency = new CreateDependency(); // CreateDependency | 
 
             try
             {
@@ -67,7 +69,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **string**| viewId | 
- **createDependency** | [**CreateDependency**](CreateDependency.md)| createDependency | 
+ **createDependency** | [**CreateDependency**](CreateDependency.md)|  | 
 
 ### Return type
 
@@ -87,9 +89,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Created |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -100,6 +99,8 @@ Name | Type | Description  | Notes
 ## Delete
 
 > void Delete (string viewId, DeleteDependency deleteDependency)
+
+delete
 
 delete
 
@@ -125,8 +126,8 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var viewId = viewId_example;  // string | viewId
-            var deleteDependency = new DeleteDependency(); // DeleteDependency | deleteDependency
+            var viewId = "viewId_example";  // string | viewId
+            var deleteDependency = new DeleteDependency(); // DeleteDependency | 
 
             try
             {
@@ -150,7 +151,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **string**| viewId | 
- **deleteDependency** | [**DeleteDependency**](DeleteDependency.md)| deleteDependency | 
+ **deleteDependency** | [**DeleteDependency**](DeleteDependency.md)|  | 
 
 ### Return type
 
@@ -170,8 +171,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | No Content |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -179,11 +178,13 @@ void (empty response body)
 [[Back to README]](../README.md)
 
 
-## Delete_0
+## DeleteById
 
-> void Delete_0 (string dependencyId, string viewId)
+> void DeleteById (string viewId, string dependencyId)
 
-delete
+deleteById
+
+deleteById
 
 ### Example
 
@@ -196,7 +197,7 @@ using Com.Gridly.Model;
 
 namespace Example
 {
-    public class Delete_0Example
+    public class DeleteByIdExample
     {
         public static void Main()
         {
@@ -207,17 +208,17 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var dependencyId = dependencyId_example;  // string | dependencyId
-            var viewId = viewId_example;  // string | viewId
+            var viewId = "viewId_example";  // string | viewId
+            var dependencyId = "dependencyId_example";  // string | dependencyId
 
             try
             {
-                // delete
-                apiInstance.Delete_0(dependencyId, viewId);
+                // deleteById
+                apiInstance.DeleteById(viewId, dependencyId);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling ViewDependencyApi.Delete_0: " + e.Message );
+                Debug.Print("Exception when calling ViewDependencyApi.DeleteById: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -231,8 +232,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dependencyId** | **string**| dependencyId | 
  **viewId** | **string**| viewId | 
+ **dependencyId** | **string**| dependencyId | 
 
 ### Return type
 
@@ -252,8 +253,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | No Content |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -264,6 +263,8 @@ void (empty response body)
 ## Get
 
 > Dependency Get (string dependencyId, string viewId)
+
+get
 
 get
 
@@ -289,8 +290,8 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var dependencyId = dependencyId_example;  // string | dependencyId
-            var viewId = viewId_example;  // string | viewId
+            var dependencyId = "dependencyId_example";  // string | dependencyId
+            var viewId = "viewId_example";  // string | viewId
 
             try
             {
@@ -335,9 +336,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -348,6 +346,8 @@ Name | Type | Description  | Notes
 ## List
 
 > List&lt;Dependency&gt; List (string viewId)
+
+list
 
 list
 
@@ -373,7 +373,7 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var viewId = viewId_example;  // string | viewId
+            var viewId = "viewId_example";  // string | viewId
 
             try
             {
@@ -417,9 +417,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -430,6 +427,8 @@ Name | Type | Description  | Notes
 ## Update
 
 > Dependency Update (string dependencyId, string viewId, UpdateDependency updateDependency)
+
+update
 
 update
 
@@ -455,9 +454,9 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new ViewDependencyApi(Configuration.Default);
-            var dependencyId = dependencyId_example;  // string | dependencyId
-            var viewId = viewId_example;  // string | viewId
-            var updateDependency = new UpdateDependency(); // UpdateDependency | updateDependency
+            var dependencyId = "dependencyId_example";  // string | dependencyId
+            var viewId = "viewId_example";  // string | viewId
+            var updateDependency = new UpdateDependency(); // UpdateDependency | 
 
             try
             {
@@ -483,7 +482,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dependencyId** | **string**| dependencyId | 
  **viewId** | **string**| viewId | 
- **updateDependency** | [**UpdateDependency**](UpdateDependency.md)| updateDependency | 
+ **updateDependency** | [**UpdateDependency**](UpdateDependency.md)|  | 
 
 ### Return type
 
@@ -503,10 +502,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **201** | Created |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

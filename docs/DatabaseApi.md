@@ -41,7 +41,7 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new DatabaseApi(Configuration.Default);
-            var projectId = 789;  // long | projectId
+            var projectId = 789L;  // long | projectId
             var body = new CreateDatabase(); // CreateDatabase | body
 
             try
@@ -87,10 +87,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **201** | Created |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -126,7 +122,7 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new DatabaseApi(Configuration.Default);
-            var dbId = dbId_example;  // string | dbId
+            var dbId = "dbId_example";  // string | dbId
 
             try
             {
@@ -169,8 +165,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | No Content |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -206,8 +200,8 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new DatabaseApi(Configuration.Default);
-            var dbId = dbId_example;  // string | dbId
-            var projectId = 789;  // long | projectId
+            var dbId = "dbId_example";  // string | dbId
+            var projectId = 789L;  // long | projectId
             var body = new CreateDatabase(); // CreateDatabase | body
 
             try
@@ -254,10 +248,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **201** | Created |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -293,7 +283,7 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new DatabaseApi(Configuration.Default);
-            var dbId = dbId_example;  // string | dbId
+            var dbId = "dbId_example";  // string | dbId
 
             try
             {
@@ -337,9 +327,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -376,10 +363,10 @@ namespace Example
 
             var apiInstance = new DatabaseApi(Configuration.Default);
             var expand = new List<string>(); // List<string> | expand (optional) 
-            var page = page_example;  // string | page (optional) 
-            var projectId = 789;  // long? | projectId (optional) 
-            var search = search_example;  // string | search (optional) 
-            var sort = sort_example;  // string | sort (optional) 
+            var page = "\"\"";  // string | page (optional)  (default to "")
+            var projectId = 789L;  // long? | projectId (optional) 
+            var search = "search_example";  // string | search (optional) 
+            var sort = "\"\"";  // string | sort (optional)  (default to "")
 
             try
             {
@@ -404,10 +391,10 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **expand** | [**List&lt;string&gt;**](string.md)| expand | [optional] 
- **page** | **string**| page | [optional] 
+ **page** | **string**| page | [optional] [default to &quot;&quot;]
  **projectId** | **long?**| projectId | [optional] 
  **search** | **string**| search | [optional] 
- **sort** | **string**| sort | [optional] 
+ **sort** | **string**| sort | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -427,9 +414,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -465,7 +449,7 @@ namespace Example
             // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
 
             var apiInstance = new DatabaseApi(Configuration.Default);
-            var dbId = dbId_example;  // string | dbId
+            var dbId = "dbId_example";  // string | dbId
             var body = new UpdateDatabase(); // UpdateDatabase | body
 
             try
@@ -511,10 +495,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **201** | Created |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 
 [[Back to top]](#)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
