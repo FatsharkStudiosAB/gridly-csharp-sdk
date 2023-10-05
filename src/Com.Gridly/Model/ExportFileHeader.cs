@@ -42,7 +42,14 @@ namespace Com.Gridly.Model
         /// Enum columnName for value: columnName
         /// </summary>
         [EnumMember(Value = "columnName")]
-        columnName = 2
+        columnName = 2,
+
+
+		/// <summary>
+		/// Enum columnId for value: columnId
+		/// </summary>
+		[EnumMember(Value = "columnId")]
+        columnId = 3
 
     }
 
