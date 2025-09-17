@@ -141,7 +141,7 @@ namespace Com.Gridly.Model
         /// <param name="sourceStatus">sourceStatus.</param>
         public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?))
         {
-	        return new SetCell(columnId, dependencyStatus, referencedIds, sourceStatus, value);
+	        return new SetCell(columnId: columnId, dependencyStatus: dependencyStatus, referencedIds: referencedIds, sourceStatus: sourceStatus, value: value);
         }
 
         /// <summary>
