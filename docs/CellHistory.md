@@ -1,13 +1,14 @@
 
-# Com.Gridly.Model.UploadZipRequest
+# Com.Gridly.Model.CellHistory
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ColumnId** | **string** |  | 
-**FileMappings** | **string** |  | 
-**File** | **System.IO.Stream** |  | 
+**DependencyStatus** | **string** |  | [optional] 
+**SourceStatus** | **string** |  | [optional] 
+**ColumnId** | **string** |  | [optional] 
+**Value** | **Object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
