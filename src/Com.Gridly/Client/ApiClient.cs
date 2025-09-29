@@ -317,7 +317,7 @@ namespace Com.Gridly.Client
                 foreach (var headerParam in options.HeaderParameters)
                 {
                     foreach (var value in headerParam.Value)
-        {
+                    {
                         request.AddOrUpdateHeader(headerParam.Key, value);
                     }
                 }
@@ -374,7 +374,7 @@ namespace Com.Gridly.Client
                 foreach (var fileParam in options.FileParameters)
                 {
                     foreach (var file in fileParam.Value)
-            {
+                    {
                         var bytes = ClientUtils.ReadAsBytes(file);
                         var fileStream = file as FileStream;
                         if (fileStream != null)
@@ -388,7 +388,7 @@ namespace Com.Gridly.Client
             if (options.HeaderParameters != null)
             {
                 if (options.HeaderParameters.TryGetValue("Content-Type", out var contentTypes) && contentTypes.Any(header => header.Contains("multipart/form-data")))
-            {
+                {
                     request.AlwaysMultipartFormData = true;
                 }
             }
@@ -413,7 +413,7 @@ namespace Com.Gridly.Client
                 ErrorText = response.ErrorMessage,
                 Cookies = new List<Cookie>()
             };
-            
+
             if (response.Headers != null)
             {
                 foreach (var responseHeader in response.Headers)
@@ -442,7 +442,7 @@ namespace Com.Gridly.Client
                             responseCookies.Domain)
                         );
                 }
-        }
+            }
 
             return transformed;
         }
@@ -458,11 +458,11 @@ namespace Com.Gridly.Client
         /// <param name="configuration">A per-request configuration object.
         /// It is assumed that any merge with GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A new ApiResponse instance.</returns>
-        private async Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration)
+        private async System.Threading.Tasks.Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, System.Threading.Tasks.Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration)
         {
             var baseUrl = configuration.GetOperationServerUrl(options.Operation, options.OperationIndex) ?? _baseUrl;
             var clientOptions = new RestClientOptions(baseUrl)
-        {
+            {
                 ClientCertificates = configuration.ClientCertificates,
                 Timeout = configuration.Timeout,
                 Proxy = configuration.Proxy,
@@ -471,44 +471,44 @@ namespace Com.Gridly.Client
                 RemoteCertificateValidationCallback = configuration.RemoteCertificateValidationCallback
             };
             setOptions(clientOptions);
-
+            
             using (RestClient client = new RestClient(clientOptions,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
-        {
+            {
                 InterceptRequest(request);
 
                 RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
 
                 // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
                 if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
-        {
+                {
                     try
-            {
+                    {
                         response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
                     }
                     catch (Exception ex)
-                {
+                    {
                         throw ex.InnerException != null ? ex.InnerException : ex;
+                    }
                 }
-            }
                 else if (typeof(T).Name == "Stream") // for binary response
                 {
                     response.Data = (T)(object)new MemoryStream(response.RawBytes);
-        }
+                }
                 else if (typeof(T).Name == "Byte[]") // for byte response
-        {
+                {
                     response.Data = (T)(object)response.RawBytes;
                 }
                 else if (typeof(T).Name == "String") // for string response
-            {
+                {
                     response.Data = (T)(object)response.Content;
-            }
+                }
 
                 InterceptResponse(request, response);
 
                 var result = ToApiResponse(response);
                 if (response.ErrorMessage != null)
-            {
+                {
                     result.ErrorText = response.ErrorMessage;
                 }
 
@@ -536,13 +536,13 @@ namespace Com.Gridly.Client
                         };
 
                         result.Cookies.Add(cookie);
-                        }
                     }
-                return result;
                 }
+                return result;
             }
+        }
 
-        private async Task<RestResponse<T>> DeserializeRestResponseFromPolicyAsync<T>(RestClient client, RestRequest request, PolicyResult<RestResponse> policyResult, CancellationToken cancellationToken = default)
+        private async System.Threading.Tasks.Task<RestResponse<T>> DeserializeRestResponseFromPolicyAsync<T>(RestClient client, RestRequest request, PolicyResult<RestResponse> policyResult, CancellationToken cancellationToken = default)
         {
             if (policyResult.Outcome == OutcomeType.Successful) 
             {
@@ -551,12 +551,12 @@ namespace Com.Gridly.Client
             else
             {
                 return new RestResponse<T>(request)
-            {
+                {
                     ErrorException = policyResult.FinalException
                 };
             }
-            }
-
+        }
+                
         private ApiResponse<T> Exec<T>(RestRequest request, RequestOptions options, IReadableConfiguration configuration)
         {
             Action<RestClientOptions> setOptions = (clientOptions) =>
@@ -566,49 +566,49 @@ namespace Com.Gridly.Client
                 if (options.Cookies != null && options.Cookies.Count > 0)
                 {
                     foreach (var cookie in options.Cookies)
-            {
+                    {
                         cookies.Add(new Cookie(cookie.Name, cookie.Value));
                     }
-            }
+                }
                 clientOptions.CookieContainer = cookies;
             };
 
-            Func<RestClient, Task<RestResponse<T>>> getResponse = (client) =>
+            Func<RestClient, System.Threading.Tasks.Task<RestResponse<T>>> getResponse = (client) =>
             {
                 if (RetryConfiguration.RetryPolicy != null)
-            {
+                {
                     var policy = RetryConfiguration.RetryPolicy;
                     var policyResult = policy.ExecuteAndCapture(() => client.Execute(request));
                     return DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult);
-            }
+                }
                 else
-            {
+                {
                     return System.Threading.Tasks.Task.FromResult(client.Execute<T>(request));
-            }
+                }
             };
 
             return ExecClientAsync(getResponse, setOptions, request, options, configuration).GetAwaiter().GetResult();
         }
 
-        private Task<ApiResponse<T>> ExecAsync<T>(RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
+        private System.Threading.Tasks.Task<ApiResponse<T>> ExecAsync<T>(RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
         {
             Action<RestClientOptions> setOptions = (clientOptions) =>
             {
                 //no extra options
             };
 
-            Func<RestClient, Task<RestResponse<T>>> getResponse = async (client) =>
-        {
-                if (RetryConfiguration.AsyncRetryPolicy != null)
+            Func<RestClient, System.Threading.Tasks.Task<RestResponse<T>>> getResponse = async (client) =>
             {
+                if (RetryConfiguration.AsyncRetryPolicy != null)
+                {
                     var policy = RetryConfiguration.AsyncRetryPolicy;
                     var policyResult = await policy.ExecuteAndCaptureAsync((ct) => client.ExecuteAsync(request, ct), cancellationToken).ConfigureAwait(false);
                     return await DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult, cancellationToken).ConfigureAwait(false);
-            }
+                }
                 else
-            {
+                {
                     return await client.ExecuteAsync<T>(request, cancellationToken).ConfigureAwait(false);
-            }
+                }
             };
 
             return ExecClientAsync(getResponse, setOptions, request, options, configuration);
@@ -624,7 +624,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Get, path, options, config), options, config, cancellationToken);
@@ -639,7 +639,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PostAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> PostAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Post, path, options, config), options, config, cancellationToken);
@@ -654,11 +654,11 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
-            {
+        public System.Threading.Tasks.Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Put, path, options, config), options, config, cancellationToken);
-            }
+        }
 
         /// <summary>
         /// Make a HTTP DELETE request (async).
@@ -669,7 +669,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> DeleteAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> DeleteAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Delete, path, options, config), options, config, cancellationToken);
@@ -684,7 +684,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> HeadAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> HeadAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Head, path, options, config), options, config, cancellationToken);
@@ -699,7 +699,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> OptionsAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> OptionsAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Options, path, options, config), options, config, cancellationToken);
@@ -714,7 +714,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PatchAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task<ApiResponse<T>> PatchAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, CancellationToken cancellationToken = default)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Patch, path, options, config), options, config, cancellationToken);
@@ -734,7 +734,7 @@ namespace Com.Gridly.Client
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Get, path, options, config), options, config);
-                }
+        }
 
         /// <summary>
         /// Make a HTTP POST request (synchronous).
@@ -748,7 +748,7 @@ namespace Com.Gridly.Client
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Post, path, options, config), options, config);
-            }
+        }
 
         /// <summary>
         /// Make a HTTP PUT request (synchronous).
@@ -759,10 +759,10 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
         public ApiResponse<T> Put<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
-            {
+        {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Put, path, options, config), options, config);
-            }
+        }
 
         /// <summary>
         /// Make a HTTP DELETE request (synchronous).
@@ -773,7 +773,7 @@ namespace Com.Gridly.Client
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
         public ApiResponse<T> Delete<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
-            {
+        {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Delete, path, options, config), options, config);
         }
@@ -790,7 +790,7 @@ namespace Com.Gridly.Client
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Head, path, options, config), options, config);
-            }
+        }
 
         /// <summary>
         /// Make a HTTP OPTION request (synchronous).
