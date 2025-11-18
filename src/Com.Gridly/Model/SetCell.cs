@@ -141,16 +141,16 @@ namespace Com.Gridly.Model
         [DataMember(Name = "color", EmitDefaultValue = true)]
         public string Color { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SetCell" /> class.
-        /// </summary>
-        /// <param name="color">color.</param>
-        /// <param name="columnId">columnId.</param>
-        /// <param name="dependencyStatus">dependencyStatus.</param>
-        /// <param name="referencedIds">referencedIds.</param>
-        /// <param name="value">value.</param>
-        /// <param name="sourceStatus">sourceStatus.</param>
-        public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?), string color = default)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SetCell" /> class.
+		/// </summary>
+		/// <param name="columnId">columnId.</param>
+		/// <param name="dependencyStatus">dependencyStatus.</param>
+		/// <param name="referencedIds">referencedIds.</param>
+		/// <param name="value">value.</param>
+		/// <param name="sourceStatus">sourceStatus.</param>
+		/// <param name="color">color.</param>
+		public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?), string color = default)
         {
 	        return new SetCell(color: color, columnId: columnId, dependencyStatus: dependencyStatus, referencedIds: referencedIds, sourceStatus: sourceStatus, value: value);
         }
