@@ -113,18 +113,20 @@ namespace Com.Gridly.Model
         [DataMember(Name = "sourceStatus", EmitDefaultValue = true)]
         public SourceStatusEnum? SourceStatus { get; set; }
         
-        [Obsolete("Use SetCell.New(...) instead")]
+ 
         /// <summary>
         /// Initializes a new instance of the <see cref="SetCell" /> class.
         /// </summary>
+        /// <param name="color">color.</param>
         /// <param name="columnId">columnId.</param>
         /// <param name="dependencyStatus">dependencyStatus.</param>
         /// <param name="lengthLimit">lengthLimit.</param>
         /// <param name="referencedIds">referencedIds.</param>
         /// <param name="sourceStatus">sourceStatus.</param>
         /// <param name="value">value.</param>
-        public SetCell(string columnId = default, DependencyStatusEnum? dependencyStatus = default, int lengthLimit = default, List<string> referencedIds = default, SourceStatusEnum? sourceStatus = default, Object value = default)
+        public SetCell(string color = default, string columnId = default, DependencyStatusEnum? dependencyStatus = default, int lengthLimit = default, List<string> referencedIds = default, SourceStatusEnum? sourceStatus = default, Object value = default)
         {
+            this.Color = color;
             this.ColumnId = columnId;
             this.DependencyStatus = dependencyStatus;
             this.LengthLimit = lengthLimit;
@@ -134,16 +136,23 @@ namespace Com.Gridly.Model
         }
 
         /// <summary>
+        /// Gets or Sets Color
+        /// </summary>
+        [DataMember(Name = "color", EmitDefaultValue = true)]
+        public string Color { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SetCell" /> class.
         /// </summary>
+        /// <param name="color">color.</param>
         /// <param name="columnId">columnId.</param>
         /// <param name="dependencyStatus">dependencyStatus.</param>
         /// <param name="referencedIds">referencedIds.</param>
         /// <param name="value">value.</param>
         /// <param name="sourceStatus">sourceStatus.</param>
-        public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?))
+        public static SetCell New(string columnId = default(string), DependencyStatusEnum? dependencyStatus = default(DependencyStatusEnum?), List<string> referencedIds = default(List<string>), Object value = default(Object), SourceStatusEnum? sourceStatus = default(SourceStatusEnum?), string color = default)
         {
-	        return new SetCell(columnId: columnId, dependencyStatus: dependencyStatus, referencedIds: referencedIds, sourceStatus: sourceStatus, value: value);
+	        return new SetCell(color: color, columnId: columnId, dependencyStatus: dependencyStatus, referencedIds: referencedIds, sourceStatus: sourceStatus, value: value);
         }
 
         /// <summary>
@@ -178,6 +187,7 @@ namespace Com.Gridly.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class SetCell {\n");
+            sb.Append("  Color: ").Append(Color).Append("\n");
             sb.Append("  ColumnId: ").Append(ColumnId).Append("\n");
             sb.Append("  DependencyStatus: ").Append(DependencyStatus).Append("\n");
             sb.Append("  LengthLimit: ").Append(LengthLimit).Append("\n");
