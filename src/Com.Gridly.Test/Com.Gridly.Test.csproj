@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Com.Gridly.Test</AssemblyName>
     <RootNamespace>Com.Gridly.Test</RootNamespace>
-    <TargetFrameworks>net48;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks> <!--;net8.0;net9.0-->
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
