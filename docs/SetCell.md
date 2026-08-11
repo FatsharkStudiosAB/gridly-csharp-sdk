@@ -1,10 +1,10 @@
-
 # Com.Gridly.Model.SetCell
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Color** | **string** |  | [optional] 
 **ColumnId** | **string** |  | [optional] 
 **DependencyStatus** | **string** |  | [optional] 
 **LengthLimit** | **int** |  | [optional] 
@@ -12,7 +12,5 @@ Name | Type | Description | Notes
 **SourceStatus** | **string** |  | [optional] 
 **Value** | **Object** |  | [optional] 
 
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to README]](../README.md)
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
